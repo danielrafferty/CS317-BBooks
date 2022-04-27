@@ -1,0 +1,349 @@
+<html>
+<head>
+	<title>Bbook</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="icon" type="image/png"  href="icon.png" >
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel="icon" sizes="192x192" href="img/icon.png" />
+	<link rel="apple-touch-icon" href="img/icon.png" />
+	<link rel="stylesheet" href="css/materialize.css" />
+	<link rel="stylesheet" href="css/style.css" />
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+</head>
+
+<body>
+	<header>
+		<div class="navbar-fixed">
+			<nav class="red" role="navigation">
+				<div class="nav-wrapper container" id="nav">
+					<a id="logo-container" class="brand-logo">Bbook</a>
+					<a id="nav-menu" href="#" data-activates="nav-mobile" class="button-collapse hide"><i class="mdi-navigation-menu"></i></a>
+						
+					<div id="searchFilterMenu" class="hide">
+						<ul id="searchDropdown" class="dropdown-content">
+			      			<li><a href="#!" id="filterButton">Filter Off</a></li>
+			      			<li><a href="#!" id="addFilterButton">Add to Filter</a></li>
+							<li><a href="#!" id="clearFilterButton">Clear</a></li>
+	      				</ul>
+
+		      			<a class="dropdown-button right" href="#!" data-constrainwidth="false" data-activates="searchDropdown"><i class="mdi-navigation-more-vert"></i></a>
+
+					</div>
+
+					<ul id="nav-desktop" class="right hide-on-med-and-down hide">
+						<li class="homeMenu"><a href="#">Home</a></li>
+						<li class="searchMenu"><a href="#">Search</a></li>
+						<li class="booksMenu"><a href="#">Books</a></li>
+						<li class="settingsMenu"><a href="#">Settings</a></li>
+						<li class="aboutMenu"><a href="#">About</a></li>
+						<li class="logoutMenu"><a href="#">Log out</a></li>
+	      			</ul>
+
+					<ul id="nav-mobile" class="side-nav hide">
+						<li class="homeMenu"><a href="#">Home</a></li>
+						<li class="searchMenu"><a href="#">Search</a></li>
+						<li class="booksMenu"><a href="#">Books</a></li>
+						<div class="divider"></div>
+						<li class="settingsMenu"><a href="#">Settings</a></li>
+						<li class="aboutMenu"><a href="#">About</a></li>
+						<div class="divider"></div>
+						<li class="logoutMenu"><a href="#">Log out</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+	<main id="mainView">
+		
+		<!-- These divs should only be accessed if the user is not logged in -->
+		<div class="BBookSection row hide" id="welcome">
+			<div class="row center" id="notLoggedIn">
+				<p><a class="waves-effect waves-light btn red" id="loginButton">Log In</a>
+				<a class="waves-effect waves-light btn red" id="signupButton">Sign Up</a></p>
+			</div>				
+		</div>
+
+		<div class="BBookSection row hide" id="login">
+			<div class="row center">
+				<form class="col s12" id="loginForm">
+					<div class="row">
+						<div class="input-field col s12">
+							<input name="email" type="text" class="validate">
+							<label for="email">Email</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<input name="password" type="password" class="validate">
+							<label for="password">Password</label>
+						</div>
+					</div>
+				</form>
+				<a class="waves-effect waves-light btn red" id="loginConfirm">Log In</a>
+				<a class="waves-effect waves-light btn red" id="loginCancel">Cancel</a>
+			</div>				
+		</div>
+
+		<div class="BBookSection row hide" id="signup">
+			<div class="row center">
+				<form class="col s12" id="signupForm">
+					<div class="row">
+						<div class="input-field col s6">
+							<input name="firstName" type="text" class="validate">
+							<label for="firstName">First Name</label>
+						</div>
+						<div class="input-field col s6">
+							<input name="lastName" type="text" class="validate">
+							<label for="lastName">Last Name</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<input name="email" type="text" class="validate">
+							<label for="email">Email</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<input name="password" type="password" class="validate">
+							<label for="password">Password</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<input name="passwordConfirm" type="password" class="validate">
+							<label for="passwordConfirm">Confirm Password</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<input name="postcode" type="text" class="validate">
+							<label for="postcode">Post Code</label>
+						</div>
+					</div>
+				</form>	
+				<a class="waves-effect waves-light btn red" id="signupConfirm">Sign Up</a>
+				<a class="waves-effect waves-light btn red" id="signupCancel">Cancel</a>
+			</div>
+		</div>
+
+		<!-- These divs should only be accessible when the user is logged in -->
+		<div class="BBookSection row hide" id="home">
+			<div class="col s12">
+				<h3 id="firstName" class="red-text">First Name here</h3>
+				<div class="divider"></div>
+				<div class="section">
+					<div class="row">
+						<div class="valign-wrapper valign-wrapper">
+							<a class="col s3 waves-effect waves-light btn red valign" id="addBookButton">Add Book</a>
+							<h5 class=" offset-s1 col s8">Add a book to lend to people in your area!</h5>
+						</div>
+					</div>
+				</div>
+				<div class="divider"></div>
+				<div class="section">
+					<div class="row">
+						<div class="valign-wrapper valign-wrapper">
+							<div class="row col s8">
+								<div class="row">
+									<h5>You have <span id="credits"></span> credits.</h5>
+								</div>
+								<div class="row input-field"  id = "changeCreditsForm">
+									<input name="creditSettings" type="text" class="validate">
+									<label for="creditSettings">Credits</label>
+								</div>
+							</div>
+							<div class="row col s4">
+								<div class="row">
+									<a class="waves-effect waves-light btn red col s12" id="addCreditsButton">Add Credits</a>
+								</div>
+								<div class="row">
+									<a class="waves-effect waves-light btn red col s12" id="removeCreditsButton">Remove Credits</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="BBookSection hide" id="addBook">
+			<div class="row center">
+				<form class="col s12" id="addBookForm">
+					<div class="row">
+						<div class="input-field col s12">
+							<input name="isbn" type="text" class="validate" pattern="^[0-9]{10}([0-9]{3})?$" title="Please enter a valid ISBN number.">
+							<label for="isbn">ISBN</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<input name="price" type="number" class="validate" step="0.01">
+							<label for="price">Price</label>
+						</div>
+					</div>
+				</form>	
+				<a class="waves-effect waves-light btn red" id="addBookConfirm">Add Book</a>
+				<a class="waves-effect waves-light btn red" id="addBookCancel">Cancel</a>
+			</div>				
+
+		</div>
+
+		<div class="BBookSection hide" id="search">
+		    <div id="map-canvas"></div> 			
+			 <!-- Modal Structure -->
+			 <div id="searchModal" class="modal bottom-sheet">
+			 	<div class="modal-content">
+			 	    <h4 id="modalUser"></h5>
+		 			<ul class="collection" id="searchResults"></ul>
+	 			</div>
+			 </div>
+
+			<div id="filterModal" class="modal bottom-sheet">
+				<div class="modal-content">
+					<form class="row">
+						<div class="input-field col s9" id = "filterForm">
+							<input name="filter" type="text" class="validate">
+							<label for="filter">Filter</label>
+						</div>
+						<a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat col s3" id = "setFilterButton">Filter</a>
+					</form>
+	 			</div>
+			</div>
+
+		</div>
+
+		<div class="BBookSection hide" id="books">
+			<ul class="tabs">
+				<li class="tab col s3"><a href="#lendingTab">Lending</a></li>
+				<li class="tab col s3"><a href="#borrowingTab">Borrowing</a></li>
+			</ul>
+			<div id="borrowingTab" class="row"></div>
+			<div id="lendingTab" class="row">
+			</div>
+			<a class="btn-floating btn-large waves-effect waves-light red" id="addBookSmallButton">
+                <i class="mdi-content-add"></i>
+           	</a>
+
+  		</div>
+
+		<div class="BBookSection row hide" id="settings">
+			<div class="col s12 truncate" id = "userInfo">
+				<p>Hello user, you should be logged in now. Change your settings here.</p>
+			</div>
+            <div class="row center">
+                <form class="col s12" id="changeDetailForm">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input name="firstnameSettings" type="text" class="validate">
+                            <label for="firstnameSettings">First Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input name="surnameSettings" type="text" class="validate">
+                            <label for="surameSettings">Surname</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input name="emailSettings" type="text" class="validate">
+                            <label for="emailSettings">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input name="postcodeSettings" type="text" class="validate">
+                            <label for="postcodeSettings">Postcode</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input name="maxDistanceSettings" type="text" class="validate">
+                            <label for="maxDistanceSettings">Max Distance</label>
+                        </div>
+                    </div>
+                </form>
+                <div class="col s12" id = "userCoords">
+                     <a class="waves-effect waves-light btn red" id="amendDetailsButton">Amend Changes</a>
+                	<a class="waves-effect waves-light btn red" id="getLocationButton">Get Location</a>
+                    <p>Coords</p>
+                </div>
+            </div>
+		</div>
+
+		<div class="BBookSection row hide" id="about">
+			<div class="divider"></div>
+			<div class="section col s12">
+				<h5>About BBook</h5>
+				<p>BBook is a service created by an Entrepenurship group at the University of Strathclyde. 
+                   This mobile web app prototype was designed in collaboration with a group of Computer Science 
+                   students as part of class CS317.</p>
+			</div>
+			<div class="divider"></div>
+			<div class="section col s12">
+				<h5>BBook Group</h5>
+				<p>Alexander Stead</p>
+				<p>Athinais Patrona</p>
+				<p>John Gebbie</p>
+				<p>Rory MacPherson</p>
+				<p>Camille Planchot</p>
+			</div>
+			<div class="divider"></div>
+			<div class="section col s12">
+				<h5>App Developers</h5>
+				<p>Paul McGurk</p>
+				<p>Aidan O'Grady</p>
+				<p>Daniel Rafferty</p>
+				<p>Arturas Sikorskis</p>
+			</div>		
+  		</div>
+
+	</main>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+
+	<script id="bookTemplate" type="text/x-handlebars-template">
+		<div class='col s12'>
+			<div class='card grey lighten-5 bookCard'>
+				<div class='card-content'>
+					<div class='row'>
+						<span class='card-title red-text col s12'>{{title}}</span>
+						<p class="col s6"><b>{{author}}</b></p>
+                        <p class="col s6"><b>Status</b></p>
+                        <p class="col s6"><b>{{lend}}</b>: {{owner}}</p>
+						<div class="input-field col s6">
+							<select class="status" id="{{id}}">
+								<option value="" disabled selected>Choose your option</option>
+								<option value="1">Available</option>
+								<option value="2">On Loan</option>
+								<option value="3">Waiting Collection</option>
+								<option value="4">Waiting Postage</option>
+							</select>
+						</div>
+  					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+
+	<script id="cBookTemplate" type="text/x-handlebars-template">
+		<li class="collection-item searchResult" id="{{id}}">
+			<h5 class="searchTitle">{{title}}</h5>
+			<p class="searchAuthor">{{author}}</p>
+			<p class="searchPrice">£ {{guarantee}} ({{credits}}Cr)</p>
+			<p class="searchBID hide">{{BID}}</p>
+		</li>
+	</script>
+
+	<script type="text/javascript" src="js/Model.js"></script>
+	<script type="text/javascript" src="js/View.js"></script>
+	<script type="text/javascript" src="js/Controller.js"></script>
+
+</body>
+</html>
